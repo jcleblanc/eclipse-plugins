@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <!-- Toolbar Dropdown Menu -->
+   <extension point="org.eclipse.ui.commands">
+      <category id="com.x.sampleplugin.dropdown.category" name="Sample Plugin DropDown"></category>
+      <command categoryId="com.x.sampleplugin.dropdown.category" id="com.x.sampleplugin.dropdown.command" name="DropDown">
+         <commandParameter id="com.x.sampleplugin.dropdown.msg" name="DropDown Options" optional="true"></commandParameter>
+      </command>
+      <command categoryId="com.x.sampleplugin.dropdown.category" id="com.x.sampleplugin.dropdown.commandProfile" name="Profile">
+         <commandParameter id="com.x.sampleplugin.dropdown.msg" name="DropDown Options" optional="true"></commandParameter>
+      </command>
+      <command categoryId="com.x.sampleplugin.dropdown.category" id="com.x.sampleplugin.dropdown.commandLoadSite" name="LoadSite">
+         <commandParameter id="com.x.sampleplugin.dropdown.msg" name="DropDown Options" optional="true"></commandParameter>
+      </command> 
+   </extension>
+   
+   <!-- Icons used for dropdown and for dropdown menu items -->
+   <extension point="org.eclipse.ui.commandImages">
+      <image commandId="com.x.sampleplugin.dropdown.command" icon="icons/home.png"></image>
+      <image commandId="com.x.sampleplugin.dropdown.commandProfile" icon="icons/profile.png"></image>
+      <image commandId="com.x.sampleplugin.dropdown.commandLoadSite" icon="icons/site.png"></image>
+   </extension>
+   
+   <!-- Handlers for each dropdown menu item clicked -->
+   <extension point="org.eclipse.ui.handlers">
+      <handler commandId="com.x.sampleplugin.dropdown.command" class="com.x.sampleplugin.handlers.DropDownHandler"></handler>
+      <handler commandId="com.x.sampleplugin.dropdown.commandProfile" class="com.x.sampleplugin.handlers.DropDownHandler"></handler>
+      <handler commandId="com.x.sampleplugin.dropdown.commandLoadSite" class="com.x.sampleplugin.handlers.DropDownHandler"></handler>
+   </extension>
+   
+   <!-- Dropdown Menu Options -->
+   <extension point="org.eclipse.ui.menus">
+      <!-- Toolbar Dropdown Menu -->
+      <menuContribution locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar id="com.x.sampleplugin.dropdown.toolbar">
+            <command commandId="com.x.sampleplugin.dropdown.command" id="com.x.sampleplugin.dropdown.toolbar.command" style="pulldown" 
+                     tooltip="Sample Plugin Menu Options">
+            </command>
+         </toolbar>
+      </menuContribution>
+      <menuContribution locationURI="menu:com.x.sampleplugin.dropdown.toolbar.command">
+         <!-- Dropdown Menu Options -->
+         <command commandId="com.x.sampleplugin.dropdown.commandProfile" label="Edit Profile" style="push">
+            <parameter name="com.x.sampleplugin.dropdown.msg" value="Edit Profile"></parameter>
+         </command>
+         
+         <separator name="separator1" visible="true"/>
+         
+         <command commandId="com.x.sampleplugin.dropdown.commandLoadSite" label="Load Site" style="push">
+            <parameter name="com.x.sampleplugin.dropdown.msg" value="Load Site"></parameter>
+         </command>
+      </menuContribution>
+   </extension>
+</plugin>
